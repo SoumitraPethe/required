@@ -20,6 +20,7 @@ from gamification_service import add_xp, update_weekly_progress, evaluate_achiev
 load_dotenv()
 
 app = Flask(__name__)
+
 DB = os.path.join(os.path.dirname(__file__), 'words.db')
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "change-this-secret-in-production")
 UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "uploads")
@@ -1167,11 +1168,12 @@ def delete_word(wid):
     return jsonify({'ok': True})
 
 # ── MAIN ─────────────────────────────────────────────────────
+init_db()
+
 if __name__ == '__main__':
-    init_db()
-    print("\n✅  CDS Vocab App running at http://localhost:5000\n")
+    print("\n✅ CDS Vocab App running locally\n")
     app.run(
         debug=os.environ.get("FLASK_DEBUG", "true").lower() == "true",
-        host=os.environ.get("FLASK_HOST", "127.0.0.1"),
-        port=int(os.environ.get("FLASK_PORT", "5000")),
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
     )
