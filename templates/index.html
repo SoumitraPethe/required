@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CDS English Prep — Vocabulary Master</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --olive:#2d3a1f;--gold:#c9a84c;--gold-light:#f0d080;--khaki:#8b7355;
+    --cream:#f5f0e8;--cream-dark:#e8e0d0;--red:#8b2020;--green:#1a4a2e;
+    --ink:#1a1a14;--muted:#6b6555;--card-bg:#faf7f2;--border:#d4c9b0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;
+    background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(180,160,120,.12) 39px,rgba(180,160,120,.12) 40px),
+    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(180,160,120,.06) 39px,rgba(180,160,120,.06) 40px)}
+
+  /* HEADER */
+  header{background:var(--olive);color:var(--cream);padding:0 32px;display:flex;align-items:center;
+    justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;
+    border-bottom:3px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+  .header-brand{display:flex;align-items:center;gap:12px}
+  .header-emblem{width:36px;height:36px;background:var(--gold);border-radius:50%;display:flex;
+    align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--olive);
+    font-family:'Playfair Display',serif;flex-shrink:0}
+  .header-title{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:1px;color:var(--gold-light)}
+  .header-sub{font-size:11px;color:rgba(245,240,232,.6);letter-spacing:2px;text-transform:uppercase}
+  nav{display:flex;gap:4px}
+  .nav-btn{background:transparent;border:1px solid transparent;color:rgba(245,240,232,.7);padding:7px 16px;
+    border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
+    letter-spacing:.5px;transition:all .2s}
+  .nav-btn:hover{background:rgba(201,168,76,.15);color:var(--gold-light);border-color:rgba(201,168,76,.3)}
+  .nav-btn.active{background:var(--gold);color:var(--olive);font-weight:600}
+  .auth-box{display:flex;align-items:center;gap:8px}
+  .auth-user{font-size:12px;color:var(--gold-light)}
+
+  /* MAIN */
+  main{max-width:1100px;margin:0 auto;padding:32px 24px}
+  .panel{display:none}.panel.active{display:block}
+
+  /* TOAST */
+  #toast{position:fixed;bottom:24px;right:24px;background:var(--olive);color:var(--gold-light);
+    padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;z-index:999;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);transform:translateY(80px);transition:transform .3s;pointer-events:none}
+  #toast.show{transform:translateY(0)}
+
+  /* STATS */
+  .stats-bar{display:flex;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .stat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:14px 20px;
+    flex:1;min-width:130px;display:flex;flex-direction:column;gap:2px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .stat-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600}
+  .stat-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--olive);line-height:1}
+  .stat-card.gold .stat-val{color:var(--gold)}.stat-card.red .stat-val{color:var(--red)}.stat-card.green .stat-val{color:var(--green)}
+
+  /* QUIZ */
+  .mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+  .mode-card{background:var(--card-bg);border:2px solid var(--border);border-radius:10px;padding:18px;
+    cursor:pointer;text-align:center;transition:all .2s}
+  .mode-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .mode-card.active{border-color:var(--olive);background:rgba(45,58,31,.06)}
+  .mode-icon{font-size:28px;margin-bottom:8px}.mode-name{font-weight:700;color:var(--ink);font-size:14px;margin-bottom:3px}
+  .mode-desc{font-size:11px;color:var(--muted)}
+  .quiz-filters{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:18px}
+  .quiz-filters select{width:100%;border:1px solid var(--border);border-radius:6px;padding:10px;background:var(--card-bg);font-family:'DM Sans',sans-serif}
+  .progress-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:16px}
+  .progress-title{font-weight:700;color:var(--olive);margin-bottom:10px}
+  .progress-line{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .gamify-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+  .gamify-pill{background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:13px}
+  .ach-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .ach{background:rgba(201,168,76,.18);border:1px solid var(--gold);border-radius:999px;padding:4px 10px;font-size:12px}
+  .heatmap-wrap{margin-top:12px}
+  .heatmap-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:4px;overflow-x:auto;padding-bottom:6px}
+  .heat-cell{width:12px;height:12px;border-radius:2px;background:#ebedf0;border:1px solid rgba(0,0,0,.06)}
+  .heat-l1{background:#9be9a8}
+  .heat-l2{background:#40c463}
+  .heat-l3{background:#30a14e}
+  .heat-l4{background:#216e39}
+  .heat-legend{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:6px}
+
+  .quiz-container{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:36px;
+    box-shadow:0 4px 24px rgba(0,0,0,.08);position:relative;overflow:hidden}
+  .quiz-container::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
+    background:linear-gradient(90deg,var(--gold),var(--olive))}
+  .quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+  .quiz-type-badge{display:inline-flex;align-items:center;gap:6px;background:var(--olive);color:var(--gold-light);
+    padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+  .quiz-progress{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted)}
+  .question-word{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:var(--ink);
+    text-align:center;margin:28px 0 8px;letter-spacing:-1px;line-height:1.1}
+  .question-prompt{text-align:center;color:var(--muted);font-size:15px;margin-bottom:32px;font-style:italic}
+
+  .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+  .option-btn{background:var(--cream);border:2px solid var(--border);border-radius:8px;padding:16px 20px;
+    cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--ink);
+    text-align:left;transition:all .2s;display:flex;align-items:center;gap:10px}
+  .option-btn:hover:not(:disabled){border-color:var(--gold);background:rgba(201,168,76,.08);transform:translateY(-1px)}
+  .option-btn.correct{background:rgba(26,74,46,.12);border-color:var(--green);color:var(--green)}
+  .option-btn.wrong{background:rgba(139,32,32,.1);border-color:var(--red);color:var(--red)}
+  .option-btn:disabled{cursor:default}
+  .option-letter{width:26px;height:26px;border-radius:50%;background:var(--border);display:flex;
+    align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:'DM Mono',monospace;
+    flex-shrink:0;transition:all .2s}
+  .option-btn.correct .option-letter{background:var(--green);color:white}
+  .option-btn.wrong .option-letter{background:var(--red);color:white}
+  .option-btn:hover:not(:disabled) .option-letter{background:var(--gold);color:var(--olive)}
+
+  .fill-input{width:100%;border:2px solid var(--border);border-radius:8px;padding:14px 18px;
+    font-family:'DM Sans',sans-serif;font-size:16px;background:var(--cream);color:var(--ink);
+    outline:none;transition:border-color .2s;margin-bottom:12px}
+  .fill-input:focus{border-color:var(--gold)}
+
+  .quiz-actions{display:flex;gap:12px;justify-content:center;margin-top:8px}
+  .feedback-box{background:rgba(26,74,46,.08);border:1px solid var(--green);border-radius:8px;
+    padding:14px 18px;margin-top:16px;font-size:14px;color:var(--green);display:none}
+  .feedback-box.wrong{background:rgba(139,32,32,.08);border-color:var(--red);color:var(--red)}
+  .feedback-box.show{display:block}
+
+  .score-summary{text-align:center;padding:40px 20px}
+  .score-big{font-family:'Playfair Display',serif;font-size:72px;color:var(--olive);line-height:1;margin-bottom:8px}
+  .score-label{color:var(--muted);font-size:16px;margin-bottom:24px}
+  .score-grade{font-size:18px;font-weight:600;color:var(--gold);margin-bottom:8px}
+
+  /* BUTTONS */
+  .btn{padding:11px 28px;border-radius:6px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;
+    font-size:14px;font-weight:600;letter-spacing:.5px;transition:all .2s}
+  .btn-primary{background:var(--olive);color:var(--gold-light)}
+  .btn-primary:hover{background:#1a2210;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+  .btn-secondary{background:var(--cream-dark);color:var(--ink);border:1px solid var(--border)}
+  .btn-secondary:hover{background:var(--border)}
+  .btn-gold{background:var(--gold);color:var(--olive)}
+  .btn-gold:hover{background:var(--gold-light)}
+
+  /* AI CHAT */
+  .ai-panel{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+  .ai-header{background:var(--olive);padding:16px 24px;color:var(--gold-light);display:flex;align-items:center;gap:10px;font-weight:600}
+  .ai-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .chat-messages{height:400px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+  .msg{max-width:80%;padding:12px 16px;border-radius:10px;font-size:14px;line-height:1.6;animation:fadeUp .3s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .msg.ai{background:var(--cream);border:1px solid var(--border);color:var(--ink);align-self:flex-start;border-bottom-left-radius:2px}
+  .msg.user{background:var(--olive);color:var(--cream);align-self:flex-end;border-bottom-right-radius:2px}
+  .chat-input-row{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;background:var(--cream)}
+  .chat-input{flex:1;border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-family:'DM Sans',sans-serif;
+    font-size:14px;background:white;outline:none;transition:border-color .2s}
+  .chat-input:focus{border-color:var(--gold)}
+
+  /* LIBRARY */
+  .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .section-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--olive)}
+  .search-bar{position:relative;margin-bottom:20px}
+  .search-bar input{width:100%;border:1px solid var(--border);border-radius:8px;padding:12px 16px 12px 42px;
+    font-family:'DM Sans',sans-serif;font-size:14px;background:var(--card-bg);color:var(--ink);outline:none;transition:border-color .2s}
+  .search-bar input:focus{border-color:var(--gold)}
+  .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px}
+
+  .word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:24px}
+  .word-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s;position:relative}
+  .word-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);border-color:var(--gold);transform:translateY(-2px)}
+  .word-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--ink);font-weight:700;margin-bottom:12px}
+  .word-section{margin-bottom:8px}
+  .word-section-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:4px}
+  .label-syn{color:var(--green)}.label-ant{color:var(--red)}.label-phrase{color:var(--khaki)}
+  .word-tags{display:flex;flex-wrap:wrap;gap:5px}
+  .tag{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500}
+  .tag-syn{background:rgba(26,74,46,.1);color:var(--green);border:1px solid rgba(26,74,46,.2)}
+  .tag-ant{background:rgba(139,32,32,.1);color:var(--red);border:1px solid rgba(139,32,32,.2)}
+  .tag-phrase{background:rgba(139,115,85,.1);color:var(--khaki);border:1px solid rgba(139,115,85,.2);font-style:italic}
+  .card-actions{position:absolute;top:14px;right:14px;display:flex;gap:4px;opacity:0;transition:opacity .2s}
+  .word-card:hover .card-actions{opacity:1}
+  .icon-btn{width:28px;height:28px;border-radius:4px;border:1px solid var(--border);background:white;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;color:var(--muted)}
+  .icon-btn:hover{background:var(--red);color:white;border-color:var(--red)}
+  .icon-btn.edit:hover{background:var(--olive);color:white;border-color:var(--olive)}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;
+    align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+  .modal-overlay.show{display:flex}
+  .modal{background:var(--card-bg);border-radius:14px;padding:32px;width:540px;max-width:95vw;
+    max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);border:1px solid var(--border);
+    animation:modalIn .25s ease}
+  @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(-10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+  .modal-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--olive);margin-bottom:24px}
+  .form-group{margin-bottom:18px}
+  .form-label{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+  .form-input,.form-textarea{width:100%;border:1px solid var(--border);border-radius:6px;padding:10px 14px;
+    font-family:'DM Sans',sans-serif;font-size:14px;background:var(--cream);color:var(--ink);outline:none;transition:border-color .2s}
+  .form-input:focus,.form-textarea:focus{border-color:var(--gold)}
+  .form-textarea{resize:vertical;min-height:80px}
+  .form-help{font-size:11px;color:var(--muted);margin-top:4px}
+  .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}
+
+  .empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+  .empty-state .empty-icon{font-size:48px;margin-bottom:16px}
+  .empty-state h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--olive);margin-bottom:8px}
+  .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);
+    border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+  @media(max-width:980px){
+    header{height:auto;padding:12px 16px;gap:10px;flex-wrap:wrap}
+    nav{flex-wrap:wrap;justify-content:center}
+    .auth-box{width:100%;justify-content:center;flex-wrap:wrap}
+    main{padding:22px 14px}
+    .quiz-filters{grid-template-columns:1fr 1fr}
+    .mode-grid{grid-template-columns:repeat(2,1fr)}
+    .question-word{font-size:34px}
+    .quiz-container{padding:20px 16px}
+    .quiz-header{flex-wrap:wrap;gap:8px;justify-content:center}
+    .word-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:640px){
+    .header-title{font-size:18px}
+    .header-sub{font-size:10px;letter-spacing:1px}
+    nav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .nav-btn{width:100%;padding:10px 8px;font-size:12px}
+    .btn{padding:10px 14px}
+    .stats-bar{gap:10px}
+    .stat-card{min-width:calc(50% - 5px);padding:10px 12px}
+    .stat-val{font-size:22px}
+    .mode-grid{grid-template-columns:1fr}
+    .mode-card{padding:14px}
+    .quiz-filters{grid-template-columns:1fr}
+    .options-grid{grid-template-columns:1fr}
+    .option-btn{padding:14px 12px;font-size:14px}
+    .question-word{font-size:24px;margin:18px 0 8px;line-height:1.3;letter-spacing:0}
+    .question-prompt{font-size:13px;margin-bottom:16px}
+    .quiz-actions{flex-direction:column}
+    .quiz-actions .btn{width:100%}
+    .chat-messages{height:320px;padding:12px}
+    .chat-input-row{flex-direction:column}
+    .chat-input-row .btn{width:100%}
+    .section-header{flex-direction:column;align-items:flex-start;gap:10px}
+    .word-title{font-size:18px}
+    .modal{padding:20px}
+    #toast{left:12px;right:12px;bottom:12px}
+  }
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<header>
+  <div class="header-brand">
+    <div class="header-emblem">⚔</div>
+    <div>
+      <div class="header-title">CDS Vocab Master</div>
+      <div class="header-sub">Combined Defence Services · English Preparation</div>
+    </div>
+  </div>
+  <nav>
+    <button class="nav-btn active" onclick="showPanel('quiz')">📝 Quiz</button>
+    <button class="nav-btn" onclick="showPanel('ai')">🤖 AI Tutor</button>
+    <button class="nav-btn" onclick="showPanel('library')">📚 Library</button>
+    <button class="nav-btn" onclick="showPanel('wrong')">❌ Wrong Qs</button>
+    <button class="nav-btn" onclick="showPanel('notes')">🗒 Notes</button>
+  </nav>
+  <div class="auth-box">
+    <span class="auth-user" id="auth-user">Not logged in</span>
+    <input class="form-input" id="runtime-api-key" type="password" placeholder="Paste API key" style="max-width:180px;padding:8px 10px">
+    <button class="btn btn-secondary" onclick="saveRuntimeApiKey()">Use Key</button>
+    <button class="btn btn-secondary" id="login-open-btn" onclick="openAuthModal()">Login</button>
+    <button class="btn btn-gold" id="logout-btn" onclick="doLogout()" style="display:none">Logout</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- QUIZ -->
+  <div class="panel active" id="panel-quiz">
+    <div class="stats-bar">
+      <div class="stat-card"><div class="stat-label">Total Words</div><div class="stat-val" id="stat-total">—</div></div>
+      <div class="stat-card green"><div class="stat-label">Correct</div><div class="stat-val" id="stat-correct">0</div></div>
+      <div class="stat-card red"><div class="stat-label">Wrong</div><div class="stat-val" id="stat-wrong">0</div></div>
+      <div class="stat-card gold"><div class="stat-label">Accuracy</div><div class="stat-val" id="stat-accuracy">—</div></div>
+    </div>
+
+    <div class="mode-grid">
+      <div class="mode-card active" id="mode-synonyms" onclick="setMode('synonyms')">
+        <div class="mode-icon">🔵</div><div class="mode-name">Synonyms</div><div class="mode-desc">Same meaning words</div>
+      </div>
+      <div class="mode-card" id="mode-antonyms" onclick="setMode('antonyms')">
+        <div class="mode-icon">🔴</div><div class="mode-name">Antonyms</div><div class="mode-desc">Opposite meaning words</div>
+      </div>
+      <div class="mode-card" id="mode-phrases" onclick="setMode('phrases')">
+        <div class="mode-icon">📖</div><div class="mode-name">Phrases & Idioms</div><div class="mode-desc">Meaning and usage</div>
+      </div>
+      <div class="mode-card" id="mode-spot_error" onclick="setMode('spot_error')">
+        <div class="mode-icon">✍</div><div class="mode-name">Spot the Error</div><div class="mode-desc">Grammar correction</div>
+      </div>
+      <div class="mode-card" id="mode-general" onclick="setMode('general')">
+        <div class="mode-icon">🧠</div><div class="mode-name">General (AI Hard)</div><div class="mode-desc">Hard CDS questions</div>
+      </div>
+      <div class="mode-card" id="mode-full_quiz" onclick="setMode('full_quiz')">
+        <div class="mode-icon">🎯</div><div class="mode-name">Full Quiz Mode</div><div class="mode-desc">Balanced mixed categories</div>
+      </div>
+    </div>
+    <div class="quiz-filters">
+      <select id="difficulty-filter" onchange="applyQuizFilters()">
+        <option value="all">Difficulty: All</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <select id="topic-filter" onchange="applyQuizFilters()">
+        <option value="all">Topic: All</option>
+        <option value="Synonyms / Antonyms">Synonyms / Antonyms</option>
+        <option value="Spotting Errors">Spotting Errors</option>
+        <option value="Sentence Improvement">Sentence Improvement</option>
+        <option value="Idioms & Phrases">Idioms & Phrases</option>
+        <option value="One-word substitution">One-word substitution</option>
+        <option value="Fill in the blanks">Fill in the blanks</option>
+      </select>
+      <select id="priority-filter" onchange="applyQuizFilters()">
+        <option value="on">Wrong first: ON</option>
+        <option value="off">Wrong first: OFF</option>
+      </select>
+      <select id="length-filter" onchange="applyQuizFilters()">
+        <option value="10">Questions: 10</option>
+        <option value="30">Questions: 30</option>
+        <option value="50">Questions: 50</option>
+        <option value="100">Questions: 100</option>
+      </select>
+    </div>
+
+    <div class="quiz-container" id="quiz-box">
+      <div class="empty-state" id="quiz-empty">
+        <div class="empty-icon">📚</div>
+        <h3>Add words to start quiz</h3>
+        <p>Go to the Library tab and add vocabulary words to begin practising</p>
+        <br><button class="btn btn-primary" onclick="showPanel('library')">Go to Library</button>
+      </div>
+      <div id="quiz-content" style="display:none">
+        <div class="quiz-header">
+          <span class="quiz-type-badge" id="quiz-badge">📝 Synonym</span>
+          <span class="quiz-progress" id="quiz-progress">Q 1 / 10</span>
+          <span class="quiz-progress" id="quiz-timer">⏱ 00:00</span>
+        </div>
+        <div class="question-word" id="question-word">—</div>
+        <div class="question-prompt" id="question-prompt">Choose the synonym</div>
+        <div class="options-grid" id="options-grid"></div>
+        <div class="feedback-box" id="feedback-box"></div>
+        <div class="quiz-actions">
+          <button class="btn btn-secondary" onclick="skipQuestion()">Skip</button>
+          <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" style="display:none">Next →</button>
+        </div>
+      </div>
+      <div id="quiz-score" style="display:none">
+        <div class="score-summary">
+          <div class="score-big" id="final-score">—</div>
+          <div class="score-label">Questions Answered Correctly</div>
+          <div class="score-grade" id="final-grade">—</div>
+          <br><button class="btn btn-gold" onclick="restartQuiz()">🔄 Try Again</button>
+        </div>
+      </div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-title">Progress Tracker</div>
+      <div class="progress-line" id="progress-summary">No attempts yet.</div>
+      <div class="progress-line" id="progress-latest">Latest quiz: —</div>
+      <div class="progress-line" id="progress-weak">Weak questions: —</div>
+      <div class="progress-title" style="margin-top:14px">Gamification</div>
+      <div class="gamify-grid">
+        <div class="gamify-pill" id="g-streak">🔥 Streak: 0 days</div>
+        <div class="gamify-pill" id="g-xp">⭐ XP: 0 | Level 1</div>
+      </div>
+      <div class="progress-line" id="g-level-progress">Level progress: 0 / 200</div>
+      <div class="progress-line" id="g-weekly">Weekly goal: 0/70 questions, 0/50 correct</div>
+      <div class="quiz-actions" style="justify-content:flex-start;margin:8px 0">
+        <input class="form-input" id="goal-q" type="number" min="10" max="300" placeholder="Target Q" style="max-width:130px">
+        <input class="form-input" id="goal-c" type="number" min="1" max="300" placeholder="Target Correct" style="max-width:130px">
+        <button class="btn btn-secondary" onclick="saveWeeklyGoal()">Save Goal</button>
+      </div>
+      <div class="heatmap-wrap">
+        <div class="progress-line">Daily quiz streak (last 120 days)</div>
+        <div class="heatmap-grid" id="streak-heatmap"></div>
+        <div class="heat-legend">
+          <span>Less</span>
+          <span class="heat-cell"></span><span class="heat-cell heat-l1"></span><span class="heat-cell heat-l2"></span><span class="heat-cell heat-l3"></span><span class="heat-cell heat-l4"></span>
+          <span>More</span>
+        </div>
+      </div>
+      <div class="ach-list" id="g-achievements"></div>
+    </div>
+  </div>
+
+  <!-- AI TUTOR -->
+  <div class="panel" id="panel-ai">
+    <div class="section-header"><div class="section-title">AI English Tutor</div></div>
+    <div class="ai-panel">
+      <div class="ai-header"><div class="ai-dot"></div><span>AI Tutor — Ask about any word, phrase, or grammar</span></div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg ai">
+          Jai Hind! 🇮🇳 I am your CDS English Tutor. I can help you with:<br><br>
+          • <strong>Synonyms &amp; Antonyms</strong> — "Give me synonyms of 'brave'"<br>
+          • <strong>Phrases &amp; Idioms</strong> — "What does 'bite the bullet' mean?"<br>
+          • <strong>Vocabulary in context</strong> — "Use 'audacious' in a sentence"<br>
+          • <strong>Practice questions</strong> — "Quiz me on 5 difficult words"<br>
+          • <strong>Grammar tips</strong> — Any grammar doubt for CDS<br><br>
+          What would you like to study today?
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chat-input" type="text" placeholder="Ask about any word, idiom or phrase..."
+          onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="btn btn-primary" onclick="sendChat()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIBRARY -->
+  <div class="panel" id="panel-library">
+    <div class="section-header">
+      <div class="section-title">Word Library</div>
+      <button class="btn btn-gold" onclick="openAddModal()">+ Add Word</button>
+    </div>
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search words..." id="search-input" oninput="filterWords()">
+    </div>
+    <div class="word-grid" id="word-grid"></div>
+    <div class="empty-state" id="library-empty" style="display:none">
+      <div class="empty-icon">📖</div>
+      <h3>No words yet</h3>
+      <p>Start building your vocabulary by adding words</p>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-notes">
+    <div class="section-header">
+      <div class="section-title">Notes Dashboard</div>
+    </div>
+    <div class="quiz-filters">
+      <select id="notes-category-filter" onchange="loadNotes()">
+        <option value="all">All Categories</option>
+        <option value="English">English</option>
+        <option value="Maths">Maths</option>
+        <option value="GK">GK</option>
+        <option value="Others">Others</option>
+      </select>
+      <input class="form-input" id="note-title" placeholder="Note title">
+      <input class="form-input" id="note-body" placeholder="Write note text">
+      <input class="form-input" id="note-image" type="file" accept="image/*">
+    </div>
+    <div class="quiz-actions" style="justify-content:flex-start">
+      <button class="btn btn-primary" onclick="createNote()">Add Note</button>
+    </div>
+    <div class="word-grid" id="notes-grid"></div>
+  </div>
+
+  <div class="panel" id="panel-wrong">
+    <div class="section-header">
+      <div class="section-title">Wrong Questions Practice</div>
+      <button class="btn btn-primary" onclick="startWrongPractice()">Start Practice Quiz</button>
+    </div>
+    <div class="progress-card">
+      <div class="progress-line" id="wrong-summary">Loading wrong questions...</div>
+    </div>
+    <div class="word-grid" id="wrong-grid"></div>
+  </div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="word-modal">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Add New Word</div>
+    <div class="form-group">
+      <label class="form-label">Word *</label>
+      <input class="form-input" id="input-word" type="text" placeholder="e.g. Audacious">
+    </div>
+    <div class="form-group">
+      <label class="form-label" style="color:var(--green)">Synonyms</label>
+      <input class="form-input" id="input-synonyms" type="text" placeholder="e.g. Bold, Daring, Fearless, Brave">
+      <div class="form-help">Comma-separated list of synonyms</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" style="color:var(--red)">Antonyms</label>
+      <input class="form-input" id="input-antonyms" type="text" placeholder="e.g. Timid, Cowardly, Fearful">
+      <div class="form-help">Comma-separated list of antonyms</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" style="color:var(--khaki)">Phrases / Example Usage</label>
+      <textarea class="form-textarea" id="input-phrases" placeholder="e.g. An audacious plan; He made an audacious move on the battlefield"></textarea>
+      <div class="form-help">Semicolon-separated phrases or example sentences</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="save-btn" onclick="saveWord()">Save Word</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-title">Login / Register</div>
+    <div class="form-group">
+      <label class="form-label">Username</label>
+      <input class="form-input" id="auth-username" type="text" placeholder="Enter username">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="auth-password" type="password" placeholder="Enter password">
+    </div>
+    <div class="modal-actions" style="justify-content:space-between">
+      <button class="btn btn-secondary" onclick="doRegister()">Register</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary" onclick="closeAuthModal()">Close</button>
+        <button class="btn btn-primary" onclick="doLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let wordList = [];
+let sessionCorrect = 0, sessionWrong = 0;
+let currentMode = 'synonyms';
+let currentQ = null, quizCount = 0, quizScore = 0, answered = false, isFallbackQ = false;
+let questionQueue = [];
+let currentSessionId = null;
+let quizFilters = { difficulty: 'all', topic: 'all', wrongFirst: true, numberOfQuestions: 10 };
+let currentUser = null;
+let editingId = null;
+let QUIZ_TOTAL = 10;
+let timerTask = null;
+
+function getRuntimeApiKey() {
+  return (localStorage.getItem('runtime_api_key') || '').trim();
+}
+
+function saveRuntimeApiKey() {
+  const key = (document.getElementById('runtime-api-key').value || '').trim();
+  if (!key) {
+    localStorage.removeItem('runtime_api_key');
+    toast('Runtime API key cleared');
+    return;
+  }
+  localStorage.setItem('runtime_api_key', key);
+  toast('Runtime API key saved');
+}
+
+// ═══════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════
+function toast(msg, dur = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+// ═══════════════════════════════════════════
+// API HELPERS
+// ═══════════════════════════════════════════
+async function apiFetch(path, opts = {}) {
+  const runtimeApiKey = getRuntimeApiKey();
+  const baseHeaders = { 'Content-Type': 'application/json' };
+  if (runtimeApiKey) baseHeaders['X-User-Api-Key'] = runtimeApiKey;
+  const { headers: customHeaders = {}, ...restOpts } = opts;
+  const res = await fetch(path, {
+    credentials: 'same-origin',
+    headers: { ...baseHeaders, ...customHeaders },
+    ...restOpts
+  });
+  if (res.status === 401) {
+    openAuthModal();
+    throw new Error('Please login first');
+  }
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || 'Server error');
+  }
+  return res.json();
+}
+
+function refreshAuthUI() {
+  document.getElementById('auth-user').textContent = currentUser ? `Hi, ${currentUser.username}` : 'Not logged in';
+  document.getElementById('login-open-btn').style.display = currentUser ? 'none' : 'inline-block';
+  document.getElementById('logout-btn').style.display = currentUser ? 'inline-block' : 'none';
+}
+
+function openAuthModal() {
+  document.getElementById('auth-modal').classList.add('show');
+}
+
+function closeAuthModal() {
+  document.getElementById('auth-modal').classList.remove('show');
+}
+
+async function doLogin() {
+  const username = document.getElementById('auth-username').value.trim();
+  const password = document.getElementById('auth-password').value;
+  if (!username || !password) return toast('Enter username and password');
+  const data = await apiFetch('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ username, password })
+  });
+  currentUser = data.user;
+  refreshAuthUI();
+  closeAuthModal();
+  await loadWords();
+  renderLibrary();
+  initQuiz();
+  toast('Logged in');
+}
+
+async function doRegister() {
+  const username = document.getElementById('auth-username').value.trim();
+  const password = document.getElementById('auth-password').value;
+  if (!username || !password) return toast('Enter username and password');
+  const data = await apiFetch('/api/auth/register', {
+    method: 'POST',
+    body: JSON.stringify({ username, password })
+  });
+  currentUser = data.user;
+  refreshAuthUI();
+  closeAuthModal();
+  await loadWords();
+  renderLibrary();
+  initQuiz();
+  toast('Registered and logged in');
+}
+
+async function doLogout() {
+  await apiFetch('/api/auth/logout', { method: 'POST' });
+  currentUser = null;
+  wordList = [];
+  refreshAuthUI();
+  openAuthModal();
+  toast('Logged out');
+}
+
+async function loadWords() {
+  try {
+    wordList = await apiFetch('/api/words');
+    updateStats();
+    await loadProgress();
+  } catch (e) {
+    toast('⚠️ Could not load words: ' + e.message);
+  }
+}
+
+async function loadProgress() {
+  const data = await apiFetch('/api/progress');
+  const s = data.summary;
+  const latest = data.sessions[0];
+  document.getElementById('progress-summary').textContent =
+    `Attempts: ${s.attempts} | Correct: ${s.correct_attempts} | Wrong: ${s.wrong_attempts} | Accuracy: ${s.accuracy}%`;
+  document.getElementById('progress-latest').textContent = latest
+    ? `Latest quiz: ${latest.started_at} | Score ${latest.correct_count}/${latest.total_questions} | Wrong ${latest.wrong_count}`
+    : 'Latest quiz: —';
+  document.getElementById('progress-weak').textContent = data.weak_questions.length
+    ? `Weak questions: ${data.weak_questions.slice(0, 3).map(q => `${q.question_key} (W${q.wrong_count}/C${q.correct_count})`).join(', ')}`
+    : 'Weak questions: none';
+  await loadGamification();
+}
+
+async function loadGamification() {
+  const g = await apiFetch('/api/gamification');
+  document.getElementById('g-streak').textContent = `🔥 Streak: ${g.streak_days} day(s)`;
+  document.getElementById('g-xp').textContent = `⭐ XP: ${g.xp} | Level ${g.level}`;
+  document.getElementById('g-level-progress').textContent =
+    `Level progress: ${g.level_progress.current} / ${g.level_progress.required}`;
+  document.getElementById('g-weekly').textContent =
+    `Weekly goal: ${g.weekly_goal.current_questions}/${g.weekly_goal.target_questions} questions, ${g.weekly_goal.current_correct}/${g.weekly_goal.target_correct} correct`;
+  const ach = g.achievements || [];
+  document.getElementById('g-achievements').innerHTML = ach.length
+    ? ach.slice(0, 8).map(a => `<span class="ach">🏅 ${a.title}</span>`).join('')
+    : '<span class="progress-line">No achievements yet — keep practicing!</span>';
+  document.getElementById('goal-q').value = g.weekly_goal.target_questions;
+  document.getElementById('goal-c').value = g.weekly_goal.target_correct;
+  renderStreakHeatmap(g.activity_days || []);
+}
+
+function renderStreakHeatmap(days) {
+  const el = document.getElementById('streak-heatmap');
+  if (!el) return;
+  if (!days.length) {
+    el.innerHTML = '';
+    return;
+  }
+  const normalized = days.slice();
+  const pad = (7 - (normalized.length % 7)) % 7;
+  for (let i = 0; i < pad; i++) normalized.push({ date: '', intensity: 0, attempts: 0, empty: true });
+  const html = normalized.map(d => {
+    if (d.empty) return '<span class="heat-cell" style="opacity:0"></span>';
+    const level = Number(d.intensity || 0);
+    const cls = level > 0 ? ` heat-l${level}` : '';
+    const title = `${d.date}: ${d.attempts || 0} quiz attempt(s)`;
+    return `<span class="heat-cell${cls}" title="${title}"></span>`;
+  }).join('');
+  el.innerHTML = html;
+}
+
+async function saveWeeklyGoal() {
+  const target_questions = parseInt(document.getElementById('goal-q').value || '70', 10);
+  const target_correct = parseInt(document.getElementById('goal-c').value || '50', 10);
+  await apiFetch('/api/weekly-goal', {
+    method: 'PUT',
+    body: JSON.stringify({ target_questions, target_correct })
+  });
+  await loadGamification();
+  toast('Weekly goal updated');
+}
+
+function applyQuizFilters() {
+  quizFilters = {
+    difficulty: document.getElementById('difficulty-filter').value,
+    topic: document.getElementById('topic-filter').value,
+    wrongFirst: document.getElementById('priority-filter').value === 'on',
+    numberOfQuestions: parseInt(document.getElementById('length-filter').value, 10) || 10
+  };
+  QUIZ_TOTAL = quizFilters.numberOfQuestions;
+  initQuiz();
+}
+
+function formatSeconds(total) {
+  const t = Math.max(0, parseInt(total || 0, 10));
+  const m = String(Math.floor(t / 60)).padStart(2, '0');
+  const s = String(t % 60).padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+async function startGlobalTimer() {
+  if (timerTask) clearInterval(timerTask);
+  if (!currentSessionId) return;
+
+  const tick = async () => {
+    if (!currentSessionId) {
+      if (timerTask) clearInterval(timerTask);
+      timerTask = null;
+      return;
+    }
+    try {
+      const status = await apiFetch(`/api/quiz-sessions/${currentSessionId}/status`);
+      document.getElementById('quiz-timer').textContent = `⏱ ${formatSeconds(status.remaining_seconds)}`;
+      if (status.remaining_seconds <= 0 || status.status === 'auto_submitted') {
+        if (timerTask) clearInterval(timerTask);
+        timerTask = null;
+        quizCount = QUIZ_TOTAL;
+        loadQuestion();
+      }
+    } catch (_) {
+      // keep UI responsive even if one polling call fails
+    }
+  };
+  await tick();
+  timerTask = setInterval(tick, 1000);
+}
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function showPanel(name) {
+  if (!currentUser) {
+    openAuthModal();
+    return;
+  }
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.querySelectorAll('.nav-btn')[['quiz','ai','library','wrong','notes'].indexOf(name)].classList.add('active');
+  if (name === 'library') renderLibrary();
+  if (name === 'notes') loadNotes();
+  if (name === 'wrong') loadWrongQuestions();
+  if (name === 'quiz') { loadWords().then(() => initQuiz()); }
+}
+
+// ═══════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════
+function updateStats() {
+  document.getElementById('stat-total').textContent = wordList.length;
+  document.getElementById('stat-correct').textContent = sessionCorrect;
+  document.getElementById('stat-wrong').textContent = sessionWrong;
+  const tot = sessionCorrect + sessionWrong;
+  document.getElementById('stat-accuracy').textContent = tot > 0 ? Math.round(sessionCorrect / tot * 100) + '%' : '—';
+}
+
+// ═══════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════
+function setMode(m) {
+  currentMode = m;
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('mode-' + m).classList.add('active');
+  initQuiz();
+}
+
+async function initQuiz() {
+  if (timerTask) {
+    clearInterval(timerTask);
+    timerTask = null;
+  }
+  quizCount = 0; quizScore = 0; answered = false;
+  sessionCorrect = 0; sessionWrong = 0;
+  currentSessionId = null;
+  QUIZ_TOTAL = quizFilters.numberOfQuestions || QUIZ_TOTAL;
+  try {
+    const qUrl = currentMode === 'full_quiz'
+      ? `/api/questions/full-quiz?count=${QUIZ_TOTAL}`
+      : `/api/questions?category=${encodeURIComponent(currentMode)}&count=${QUIZ_TOTAL}`;
+    const qData = await apiFetch(qUrl);
+    questionQueue = qData.questions || [];
+    QUIZ_TOTAL = questionQueue.length || QUIZ_TOTAL;
+
+    const created = await apiFetch('/api/quiz-sessions', {
+      method: 'POST',
+      body: JSON.stringify({
+        source: currentMode === 'general' || currentMode === 'full_quiz' ? 'ai' : 'library',
+        mode: 'exam',
+        difficulty: quizFilters.difficulty,
+        topic: currentMode,
+        number_of_questions: QUIZ_TOTAL
+      })
+    });
+    currentSessionId = created.session_id;
+    startGlobalTimer();
+    updateStats();
+    loadQuestion();
+  } catch (e) {
+    if (timerTask) {
+      clearInterval(timerTask);
+      timerTask = null;
+    }
+    currentSessionId = null;
+    questionQueue = [];
+    document.getElementById('quiz-content').style.display = 'none';
+    document.getElementById('quiz-score').style.display = 'none';
+    document.getElementById('quiz-empty').style.display = 'block';
+    document.getElementById('quiz-empty').querySelector('h3').textContent = 'Quiz could not start';
+    document.getElementById('quiz-empty').querySelector('p').textContent = e.message;
+    toast('⚠️ ' + e.message);
+  }
+}
+
+function loadQuestion() {
+  const content  = document.getElementById('quiz-content');
+  const empty    = document.getElementById('quiz-empty');
+  const scoreBox = document.getElementById('quiz-score');
+
+  if (quizCount >= QUIZ_TOTAL) {
+    if (timerTask) { clearInterval(timerTask); timerTask = null; }
+    content.style.display = 'none'; empty.style.display = 'none'; scoreBox.style.display = 'block';
+    document.getElementById('final-score').textContent = quizScore + '/' + QUIZ_TOTAL;
+    const pct = quizScore / QUIZ_TOTAL * 100;
+    document.getElementById('final-grade').textContent =
+      pct >= 90 ? '🏆 Excellent — Ready for CDS!' :
+      pct >= 70 ? '✅ Good — Keep practising' :
+      pct >= 50 ? '📚 Average — More revision needed' : '❌ Below average — Focus on vocabulary';
+    if (currentSessionId) {
+      apiFetch(`/api/quiz-sessions/${currentSessionId}/finish`, {
+        method: 'POST',
+        body: JSON.stringify({ correct_count: quizScore, wrong_count: quizCount - quizScore })
+      }).then(() => loadProgress()).catch(() => {});
+    }
+    return;
+  }
+
+  if (!questionQueue.length) { empty.style.display = 'block'; content.style.display = 'none'; return; }
+  empty.style.display = 'none'; content.style.display = 'block'; scoreBox.style.display = 'none';
+  currentQ = questionQueue[quizCount];
+  isFallbackQ = true;
+  document.getElementById('quiz-badge').textContent = `📌 ${currentQ.category || currentMode}`;
+  document.getElementById('quiz-progress').textContent = `Q ${quizCount + 1} / ${QUIZ_TOTAL}`;
+  document.getElementById('question-word').textContent = currentQ.question;
+  document.getElementById('question-word').style.fontSize = '24px';
+  document.getElementById('question-prompt').textContent = `Difficulty: ${currentQ.difficulty || 'moderate'} | Select the best option`;
+
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  ['A','B','C','D'].forEach((ltr, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="option-letter">${ltr}</span>${currentQ.options[i]}`;
+    btn.onclick = () => checkMCQ(ltr, currentQ.answer, btn, grid);
+    grid.appendChild(btn);
+  });
+  document.getElementById('feedback-box').className = 'feedback-box';
+  document.getElementById('next-btn').style.display = 'none';
+  answered = false;
+}
+
+function checkMCQ(selected, correct, clickedBtn, grid) {
+  if (answered) return;
+  answered = true; quizCount++;
+  grid.querySelectorAll('.option-btn').forEach(b => {
+    b.disabled = true;
+    if (isFallbackQ) {
+      if (b.querySelector('.option-letter')?.textContent === correct) b.classList.add('correct');
+    } else {
+      if (b.textContent.trim().substring(1) === correct) b.classList.add('correct');
+    }
+  });
+  const fb = document.getElementById('feedback-box');
+  if (selected === correct) {
+    clickedBtn.classList.add('correct');
+    quizScore++; sessionCorrect++;
+    fb.className = 'feedback-box show';
+    fb.innerHTML = `✅ <strong>Correct!</strong> ${currentQ.explanation || ''}`;
+  } else {
+    clickedBtn.classList.add('wrong');
+    sessionWrong++;
+    fb.className = 'feedback-box wrong show';
+    fb.innerHTML = `❌ <strong>Incorrect.</strong> Correct option: <strong>${correct}</strong>. ${currentQ.explanation || ''}`;
+  }
+  const qKey = currentQ.id;
+  const qText = currentQ.question;
+  apiFetch('/api/quiz-attempts', {
+    method: 'POST',
+    body: JSON.stringify({
+      session_id: currentSessionId,
+      question_key: qKey,
+      question_text: qText,
+      topic: currentQ.category || currentMode,
+      difficulty: currentQ.difficulty || 'moderate',
+      selected_answer: selected,
+      correct_answer: correct,
+      options: currentQ.options || [],
+      is_correct: selected === correct,
+      source: currentMode === 'general' || currentMode === 'full_quiz'
+        ? 'ai'
+        : (currentMode === 'wrong_practice' ? 'wrong_practice' : 'library'),
+      word_key: currentQ.id,
+      word_text: currentQ.question
+    })
+  }).catch(() => {});
+  updateStats();
+  document.getElementById('next-btn').style.display = 'inline-block';
+}
+
+function skipQuestion() { quizCount++; loadQuestion(); }
+function nextQuestion() { loadQuestion(); }
+function restartQuiz() {
+  quizCount = 0; quizScore = 0; answered = false;
+  document.getElementById('quiz-score').style.display = 'none';
+  initQuiz();
+}
+
+// ═══════════════════════════════════════════
+// LIBRARY
+// ═══════════════════════════════════════════
+function renderLibrary() {
+  const grid = document.getElementById('word-grid');
+  const empty = document.getElementById('library-empty');
+  const q = (document.getElementById('search-input').value || '').toLowerCase();
+  const filtered = wordList.filter(w => !q || w.word.toLowerCase().includes(q));
+  if (filtered.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  grid.innerHTML = filtered.map(w => `
+    <div class="word-card">
+      <div class="card-actions">
+        <button class="icon-btn edit" onclick="openEditModal(${w.id})" title="Edit">✏</button>
+        <button class="icon-btn" onclick="deleteWord(${w.id})" title="Delete">🗑</button>
+      </div>
+      <div class="word-title">${w.word}</div>
+      ${w.synonyms.length ? `<div class="word-section"><div class="word-section-label label-syn">Synonyms</div>
+        <div class="word-tags">${w.synonyms.map(s=>`<span class="tag tag-syn">${s}</span>`).join('')}</div></div>` : ''}
+      ${w.antonyms.length ? `<div class="word-section"><div class="word-section-label label-ant">Antonyms</div>
+        <div class="word-tags">${w.antonyms.map(a=>`<span class="tag tag-ant">${a}</span>`).join('')}</div></div>` : ''}
+      ${w.phrases.length ? `<div class="word-section"><div class="word-section-label label-phrase">Phrases</div>
+        <div class="word-tags">${w.phrases.map(p=>`<span class="tag tag-phrase">${p}</span>`).join('')}</div></div>` : ''}
+    </div>`).join('');
+}
+
+function filterWords() { renderLibrary(); }
+
+async function deleteWord(id) {
+  if (!confirm('Delete this word?')) return;
+  try {
+    await apiFetch(`/api/words/${id}`, { method: 'DELETE' });
+    wordList = wordList.filter(w => w.id !== id);
+    renderLibrary(); updateStats();
+    toast('🗑 Word deleted');
+  } catch (e) { toast('Error: ' + e.message); }
+}
+
+// ═══════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modal-title').textContent = 'Add New Word';
+  ['word','synonyms','antonyms'].forEach(k => document.getElementById('input-' + k).value = '');
+  document.getElementById('input-phrases').value = '';
+  document.getElementById('word-modal').classList.add('show');
+}
+
+function openEditModal(id) {
+  const w = wordList.find(x => x.id === id); if (!w) return;
+  editingId = id;
+  document.getElementById('modal-title').textContent = 'Edit Word';
+  document.getElementById('input-word').value = w.word;
+  document.getElementById('input-synonyms').value = w.synonyms.join(', ');
+  document.getElementById('input-antonyms').value = w.antonyms.join(', ');
+  document.getElementById('input-phrases').value = w.phrases.join('; ');
+  document.getElementById('word-modal').classList.add('show');
+}
+
+function closeModal() { document.getElementById('word-modal').classList.remove('show'); }
+
+async function saveWord() {
+  const word = document.getElementById('input-word').value.trim();
+  if (!word) { toast('⚠️ Please enter a word'); return; }
+  const uniq = (arr) => {
+    const map = new Map();
+    arr.forEach(v => {
+      const key = v.toLowerCase();
+      if (!map.has(key)) map.set(key, v);
+    });
+    return [...map.values()];
+  };
+  const synonyms = uniq(document.getElementById('input-synonyms').value.split(',').map(s=>s.trim()).filter(Boolean));
+  const antonyms = uniq(document.getElementById('input-antonyms').value.split(',').map(s=>s.trim()).filter(Boolean));
+  const phrasesRaw = document.getElementById('input-phrases').value.trim();
+  const phrases = phrasesRaw ? phrasesRaw.split(';').map(p=>p.trim()).filter(Boolean) : [];
+  if (!synonyms.length && !antonyms.length) {
+    toast('⚠️ Add at least one synonym or antonym');
+    return;
+  }
+  const lowerWord = word.toLowerCase();
+  const duplicate = wordList.find(w => w.word.toLowerCase() === lowerWord && w.id !== editingId);
+  if (duplicate) {
+    toast('⚠️ Word already exists');
+    return;
+  }
+
+  const btn = document.getElementById('save-btn');
+  btn.innerHTML = '<span class="spinner"></span> Saving…'; btn.disabled = true;
+
+  try {
+    if (editingId !== null) {
+      const updated = await apiFetch(`/api/words/${editingId}`, {
+        method: 'PUT', body: JSON.stringify({ word, synonyms, antonyms, phrases })
+      });
+      wordList = wordList.map(w => w.id === editingId ? updated : w);
+      toast('✅ Word updated');
+    } else {
+      const added = await apiFetch('/api/words', {
+        method: 'POST', body: JSON.stringify({ word, synonyms, antonyms, phrases })
+      });
+      wordList.push(added);
+      toast('✅ Word added');
+    }
+    closeModal(); renderLibrary(); updateStats();
+  } catch (e) {
+    toast('❌ ' + e.message);
+  } finally {
+    btn.innerHTML = 'Save Word'; btn.disabled = false;
+  }
+}
+
+document.getElementById('word-modal').addEventListener('click', e => { if (e.target.id === 'word-modal') closeModal(); });
+document.getElementById('auth-modal').addEventListener('click', e => { if (e.target.id === 'auth-modal') closeAuthModal(); });
+
+// ═══════════════════════════════════════════
+// NOTES
+// ═══════════════════════════════════════════
+async function loadNotes() {
+  if (!currentUser) return;
+  const category = document.getElementById('notes-category-filter')?.value || 'all';
+  const notes = await apiFetch(`/api/notes?category=${encodeURIComponent(category)}`);
+  const grid = document.getElementById('notes-grid');
+  grid.innerHTML = notes.map(n => `
+    <div class="word-card">
+      <div class="card-actions">
+        <button class="icon-btn" onclick="deleteNote(${n.id})" title="Delete">🗑</button>
+      </div>
+      <div class="word-title">${n.title}</div>
+      <div class="word-section"><div class="word-section-label label-phrase">${n.category}</div></div>
+      <div class="word-section">${n.body || ''}</div>
+      ${n.image_url ? `<img src="${n.image_url}" style="max-width:100%;border-radius:8px;margin-top:10px">` : ''}
+    </div>
+  `).join('');
+}
+
+async function createNote() {
+  const category = document.getElementById('notes-category-filter').value === 'all' ? 'Others' : document.getElementById('notes-category-filter').value;
+  const title = document.getElementById('note-title').value.trim();
+  const body = document.getElementById('note-body').value.trim();
+  const file = document.getElementById('note-image').files[0];
+  if (!title) return toast('Note title required');
+  const fd = new FormData();
+  fd.append('category', category);
+  fd.append('title', title);
+  fd.append('body', body);
+  if (file) fd.append('image', file);
+  const runtimeApiKey = getRuntimeApiKey();
+  const headers = runtimeApiKey ? { 'X-User-Api-Key': runtimeApiKey } : {};
+  const res = await fetch('/api/notes', { method: 'POST', body: fd, credentials: 'same-origin', headers });
+  if (!res.ok) return toast('Failed to save note');
+  document.getElementById('note-title').value = '';
+  document.getElementById('note-body').value = '';
+  document.getElementById('note-image').value = '';
+  await loadNotes();
+  toast('Note saved');
+}
+
+async function loadWrongQuestions() {
+  const items = await apiFetch('/api/wrong-questions');
+  document.getElementById('wrong-summary').textContent = items.length
+    ? `${items.length} question(s) in your wrong bucket`
+    : 'No wrong questions yet. Keep practicing.';
+  const grid = document.getElementById('wrong-grid');
+  grid.innerHTML = items.map(i => `
+    <div class="word-card">
+      <div class="word-title">${i.question_text || i.question_key}</div>
+      <div class="word-section"><div class="word-section-label label-ant">Wrong ${i.wrong_count} | Correct ${i.correct_count}</div></div>
+      <div class="word-section">Topic: ${i.topic || 'General'} | Difficulty: ${i.difficulty || 'moderate'}</div>
+    </div>
+  `).join('');
+}
+
+async function startWrongPractice() {
+  try {
+    const data = await apiFetch(`/api/wrong-questions/quiz?count=${QUIZ_TOTAL}`);
+    if (!data.questions || !data.questions.length) {
+      toast('No solvable wrong questions found yet');
+      return;
+    }
+    currentMode = 'wrong_practice';
+    questionQueue = data.questions;
+    QUIZ_TOTAL = questionQueue.length;
+    quizCount = 0; quizScore = 0; answered = false;
+    sessionCorrect = 0; sessionWrong = 0;
+    const created = await apiFetch('/api/quiz-sessions', {
+      method: 'POST',
+      body: JSON.stringify({
+        source: 'wrong_practice',
+        mode: 'exam',
+        difficulty: 'mixed',
+        topic: 'wrong_practice',
+        number_of_questions: QUIZ_TOTAL
+      })
+    });
+    currentSessionId = created.session_id;
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-quiz').classList.add('active');
+    document.querySelectorAll('.nav-btn')[0].classList.add('active');
+    startGlobalTimer();
+    updateStats();
+    loadQuestion();
+  } catch (e) {
+    toast('⚠️ ' + e.message);
+  }
+}
+
+async function deleteNote(id) {
+  await apiFetch(`/api/notes/${id}`, { method: 'DELETE' });
+  await loadNotes();
+  toast('Note deleted');
+}
+
+// ═══════════════════════════════════════════
+// AI CHAT
+// ═══════════════════════════════════════════
+async function sendChat() {
+  if (!currentUser) return openAuthModal();
+  const inp = document.getElementById('chat-input');
+  const msg = inp.value.trim(); if (!msg) return;
+  inp.value = '';
+  appendMsg('user', msg);
+  const loading = appendMsg('ai', '⏳ Thinking…');
+  const ctx = wordList.length ? `Student's vocab list: ${wordList.map(w=>w.word).join(', ')}.` : '';
+  try {
+    const data = await apiFetch('/api/chat', {
+      method: 'POST',
+      body: JSON.stringify({ message: msg, context: ctx })
+    });
+    loading.textContent = data.reply || 'No response.';
+  } catch (e) {
+    loading.textContent = '⚠️ ' + e.message;
+  }
+  document.getElementById('chat-messages').scrollTop = 9999;
+}
+
+function appendMsg(role, text) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = text;
+  document.getElementById('chat-messages').appendChild(div);
+  document.getElementById('chat-messages').scrollTop = 9999;
+  return div;
+}
+
+// ═══════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════
+apiFetch('/api/auth/me')
+  .then(async (res) => {
+    document.getElementById('runtime-api-key').value = getRuntimeApiKey();
+    currentUser = res.user;
+    refreshAuthUI();
+    if (!currentUser) {
+      openAuthModal();
+      return;
+    }
+    await loadWords();
+    renderLibrary();
+    initQuiz();
+  })
+  .catch(() => {
+    openAuthModal();
+  });
+</script>
+</body>
+</html>
